@@ -24,6 +24,8 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.IOException;
 
+import cn.stormend.capacitor.plugins.sqlite.support.SQLiteQueryDTO;
+
 /**
  * 提供方法
  * - 创建数据表
@@ -91,11 +93,57 @@ public class CapacitorSqlitePlugin extends Plugin {
         }
     }
 
-    public JSArray queryList() {
-        implementation.echo()
+    @PluginMethod
+    public void queryForList(PluginCall call) {
+        if (implementation != null) {
+            JSArray array = implementation.queryForList(SQLiteQueryDTO.from(call));
+            callSingleValue(call, array);
+        } else {
+            callError(call, "plugin is null");
+        }
+    }
+
+    @PluginMethod
+    public void queryForObject(PluginCall call) {
+        if (implementation != null) {
+            JSObject object = implementation.queryForObject(SQLiteQueryDTO.from(call));
+            callSingleValue(call, object);
+        } else {
+            callError(call, "plugin is null");
+        }
+    }
+
+    @PluginMethod
+    public void insertObject(PluginCall call) {
+        if (implementation!=null) {
+            // TODO
+
+        } else {
+            callError(call, "plugin is null");
+        }
 
     }
 
+    /**
+     * 插件测试方法
+     *
+     * @param call
+     */
+    @PluginMethod
+    public void echo(PluginCall call) {
+        String value = call.getString("value");
+        if (implementation != null) {
+            try {
+                JSObject ret = new JSObject();
+                ret.put("value", implementation.echo(value));
+                call.resolve(ret);
+            } catch (Exception e) {
+                call.reject(e.getMessage());
+            }
+        } else {
+            call.reject(message);
+        }
+    }
 
     /**
      * 返回异常
@@ -126,31 +174,12 @@ public class CapacitorSqlitePlugin extends Plugin {
      */
     private void callSingleValue(PluginCall call, Object value) {
         try {
-            call.resolve(new JSObject().put("value", value));
+            call.resolve(new JSObject().put("data", value));
         } catch (Exception e) {
             call.reject(e.getLocalizedMessage());
         }
     }
 
 
-    /**
-     * 插件测试方法
-     *
-     * @param call
-     */
-    @PluginMethod
-    public void echo(PluginCall call) {
-        String value = call.getString("value");
-        if (implementation != null) {
-            try {
-                JSObject ret = new JSObject();
-                ret.put("value", implementation.echo(value));
-                call.resolve(ret);
-            } catch (Exception e) {
-                call.reject(e.getMessage());
-            }
-        } else {
-            call.reject(message);
-        }
-    }
+
 }

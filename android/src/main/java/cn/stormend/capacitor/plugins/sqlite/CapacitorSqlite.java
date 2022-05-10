@@ -63,7 +63,6 @@ public class CapacitorSqlite {
         if (!dbRegistry.containsKey(dbFile)) {
             CapSQLiteHelper sqLiteOpenHelper = new CapSQLiteHelper(context, dbFile, null, DB_VERSION);
             SQLiteDatabase db = sqLiteOpenHelper.getWritableDatabase();
-            sqLiteOpenHelper.getDatabaseName()
             dbRegistry.put(dbFile, db);
         } else {
             Log.i(TAG, String.format("数据库文件[%s]已经加载", dbFile));
@@ -71,13 +70,20 @@ public class CapacitorSqlite {
         return true;
     }
 
+    /**
+     * 查询列表
+     *
+     * @param dto
+     * @return
+     */
     public JSArray queryForList(SQLiteQueryDTO dto) {
         SQLiteDatabase database = getNextDatabase();
         JSArray array = new JSArray();
         if (database == null) {
             return array;
         }
-        Cursor cursor = database.query();
+        Cursor cursor = database.query(dto.getTblName(), dto.getReturnColumns().toArray(new String[0]), dto.getSelection(),
+                dto.getSelectionArgs().toArray(new String[0]), dto.getGroupBy(), dto.getHaving(), dto.getOrderBy(), dto.getLimit());
         while (!cursor.isAfterLast()) {
             cursor.moveToNext();
             array.put(cursorToObject(cursor));
@@ -85,18 +91,40 @@ public class CapacitorSqlite {
         return array;
     }
 
-    public JSObject queryForObject() {
-
+    /**
+     * 查询单个对象
+     *
+     * @param dto
+     * @return
+     */
+    public JSObject queryForObject(SQLiteQueryDTO dto) {
+        SQLiteDatabase database = getNextDatabase();
+        JSObject object = new JSObject();
+        if (database == null) {
+            return object;
+        }
+        Cursor cursor = database.query(dto.getTblName(), dto.getReturnColumns().toArray(new String[0]), dto.getSelection(),
+                dto.getSelectionArgs().toArray(new String[0]), dto.getGroupBy(), dto.getHaving(), dto.getOrderBy(), dto.getLimit());
+        cursor.moveToNext();
+        return cursorToObject(cursor);
     }
 
-    public void saveEntity(SQLiteEntityDTO entityDTO) {
+    /**
+     * 保存数据
+     * insert or replace entity
+     *
+     * @param entityDTO
+     * @return
+     */
+    public boolean saveEntity(SQLiteEntityDTO entityDTO) {
         SQLiteDatabase db = getNextDatabase();
         if (db != null) {
-            ContentValues values = new ContentValues();
-            db.replaceOrThrow();
-
+            long rowId = db.replaceOrThrow(entityDTO.getTblName(), entityDTO.nullColumnHack(),
+                    entityDTO.convert());
+            return rowId > 0;
         }
-
+        Log.e(TAG, "数据库为null");
+        return false;
     }
 
     /**
@@ -129,6 +157,12 @@ public class CapacitorSqlite {
         return object;
     }
 
+    /**
+     * FIXME:
+     * 获取第一个db
+     *
+     * @return
+     */
     private SQLiteDatabase getNextDatabase() {
         Iterator<SQLiteDatabase> iterator = dbRegistry.values().iterator();
         if (iterator.hasNext()) {
