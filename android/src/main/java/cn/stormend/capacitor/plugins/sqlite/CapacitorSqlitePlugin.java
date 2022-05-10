@@ -24,6 +24,8 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.IOException;
 
+import cn.stormend.capacitor.plugins.sqlite.support.SQLiteEntityDTO;
+import cn.stormend.capacitor.plugins.sqlite.support.SQLiteEntityUpdateDTO;
 import cn.stormend.capacitor.plugins.sqlite.support.SQLiteQueryDTO;
 
 /**
@@ -114,14 +116,34 @@ public class CapacitorSqlitePlugin extends Plugin {
     }
 
     @PluginMethod
-    public void insertObject(PluginCall call) {
-        if (implementation!=null) {
-            // TODO
-
+    public void insert(PluginCall call) {
+        if (implementation != null) {
+            SQLiteEntityDTO dto = SQLiteEntityDTO.from(call);
+            boolean b = implementation.saveEntity(dto);
+            callSingleValue(call, b);
         } else {
             callError(call, "plugin is null");
         }
+    }
 
+    @PluginMethod
+    public void update(PluginCall call) {
+        if (implementation != null) {
+            SQLiteEntityUpdateDTO dto = (SQLiteEntityUpdateDTO)SQLiteEntityDTO.from(call);
+            try {
+                assert dto != null;
+                dto.setWhereClause(call.getString("whereClause"))
+                .setWhereClauseArgs(call.getArray("whereClauseArgs").toList());
+            } catch (JSONException e) {
+                Log.e(TAG, e.getLocalizedMessage());
+                callError(call, e.getLocalizedMessage());
+                return;
+            }
+            boolean b = implementation.update(dto);
+            callSingleValue(call, b);
+        } else {
+            callError(call, "plugin is null");
+        }
     }
 
     /**
@@ -179,7 +201,6 @@ public class CapacitorSqlitePlugin extends Plugin {
             call.reject(e.getLocalizedMessage());
         }
     }
-
 
 
 }

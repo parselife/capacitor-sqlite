@@ -30,7 +30,7 @@ public class SQLiteEntityDTO extends AbstractSQLiteDTO {
     /**
      * 数据列
      */
-    private List<SQLiteEntityColumn> columns;
+    protected List<SQLiteEntityColumn> columns;
 
 
     /**

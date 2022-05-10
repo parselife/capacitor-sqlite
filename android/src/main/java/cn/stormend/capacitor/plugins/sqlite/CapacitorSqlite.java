@@ -22,6 +22,7 @@ import java.util.Map;
 import java.util.function.Function;
 
 import cn.stormend.capacitor.plugins.sqlite.support.SQLiteEntityDTO;
+import cn.stormend.capacitor.plugins.sqlite.support.SQLiteEntityUpdateDTO;
 import cn.stormend.capacitor.plugins.sqlite.support.SQLiteQueryDTO;
 
 public class CapacitorSqlite {
@@ -122,6 +123,23 @@ public class CapacitorSqlite {
             long rowId = db.replaceOrThrow(entityDTO.getTblName(), entityDTO.nullColumnHack(),
                     entityDTO.convert());
             return rowId > 0;
+        }
+        Log.e(TAG, "数据库为null");
+        return false;
+    }
+
+    /**
+     * 更新数据
+     *
+     * @param updateDTO
+     * @return
+     */
+    public boolean update(SQLiteEntityUpdateDTO updateDTO) {
+        SQLiteDatabase db = getNextDatabase();
+        if (db != null) {
+            int affected = db.update(updateDTO.getTblName(), updateDTO.convert(), updateDTO.getWhereClause(),
+                    updateDTO.getWhereClauseArgs().toArray(new String[0]));
+            return affected > 0;
         }
         Log.e(TAG, "数据库为null");
         return false;
