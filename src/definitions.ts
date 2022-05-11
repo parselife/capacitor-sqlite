@@ -1,7 +1,7 @@
 /*
  * @Author: alex
  * @Date: 2022-05-07 13:53:50
- * @LastEditTime: 2022-05-11 16:13:29
+ * @LastEditTime: 2022-05-12 00:02:38
  * @LastEditors: alex
  */
 
@@ -127,7 +127,7 @@ export interface CapacitorSqlitePlugin {
    * @param options dbPath: 数据库文件位置 dbName: 数据文件名
    */
   loadDatabase(options: {
-    dbPath: string;
+    dbPath?: string;
     dbName: string;
   }): Promise<{ value: string | boolean }>;
 
