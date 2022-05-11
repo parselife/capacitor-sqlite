@@ -1,20 +1,15 @@
 package cn.stormend.capacitor.plugins.sqlite.support;
 
-
 import android.util.Log;
-
 import com.getcapacitor.JSArray;
 import com.getcapacitor.PluginCall;
-
-import org.json.JSONException;
-
 import java.util.List;
+import org.json.JSONException;
 
 /**
  * sqlite 查询 dto
  */
 public class SQLiteQueryDTO extends AbstractSQLiteDTO {
-
 
     /**
      * 查询条件 eg: a=? and b like '%?'
@@ -62,7 +57,7 @@ public class SQLiteQueryDTO extends AbstractSQLiteDTO {
      * @return
      */
     public static SQLiteQueryDTO from(PluginCall call) {
-        SQLiteQueryDTO dto = new SQLiteQueryDTO(call.getString("table"));
+        SQLiteQueryDTO dto = new SQLiteQueryDTO(call.getString("tblName"));
         JSArray columns = call.getArray("returnColumns");
         JSArray selectionArgs = call.getArray("selectionArgs");
         try {
@@ -76,11 +71,12 @@ public class SQLiteQueryDTO extends AbstractSQLiteDTO {
             Log.e("QUERY", e.getLocalizedMessage());
             e.printStackTrace();
         }
-        dto.setSelection(call.getString("selection"))
-                .setGroupBy(call.getString("groupBy"))
-                .setHaving(call.getString("having"))
-                .setOrderBy(call.getString("orderBy"))
-                .setLimit(call.getString("limit"));
+        dto
+            .setSelection(call.getString("selection"))
+            .setGroupBy(call.getString("groupBy"))
+            .setHaving(call.getString("having"))
+            .setOrderBy(call.getString("orderBy"))
+            .setLimit(call.getString("limit"));
         return dto;
     }
 

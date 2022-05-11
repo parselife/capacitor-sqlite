@@ -6,9 +6,10 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.util.Log;
-
 import androidx.annotation.RequiresApi;
-
+import cn.stormend.capacitor.plugins.sqlite.support.SQLiteEntityDTO;
+import cn.stormend.capacitor.plugins.sqlite.support.SQLiteEntityUpdateDTO;
+import cn.stormend.capacitor.plugins.sqlite.support.SQLiteQueryDTO;
 import com.getcapacitor.JSArray;
 import com.getcapacitor.JSObject;
 import com.getcapacitor.Plugin;
@@ -17,16 +18,10 @@ import com.getcapacitor.PluginMethod;
 import com.getcapacitor.annotation.CapacitorPlugin;
 import com.getcapacitor.annotation.Permission;
 import com.getcapacitor.annotation.PermissionCallback;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.File;
 import java.io.IOException;
-
-import cn.stormend.capacitor.plugins.sqlite.support.SQLiteEntityDTO;
-import cn.stormend.capacitor.plugins.sqlite.support.SQLiteEntityUpdateDTO;
-import cn.stormend.capacitor.plugins.sqlite.support.SQLiteQueryDTO;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  * 提供方法
@@ -36,9 +31,10 @@ import cn.stormend.capacitor.plugins.sqlite.support.SQLiteQueryDTO;
  * - 删除数据
  */
 @RequiresApi(api = Build.VERSION_CODES.N)
-@CapacitorPlugin(name = "SqlitePlugin",
-        permissions = {@Permission(strings = {Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                Manifest.permission.READ_EXTERNAL_STORAGE})})
+@CapacitorPlugin(
+    name = "SqlitePlugin",
+    permissions = { @Permission(strings = { Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE }) }
+)
 public class CapacitorSqlitePlugin extends Plugin {
 
     private CapacitorSqlite implementation;
@@ -50,7 +46,7 @@ public class CapacitorSqlitePlugin extends Plugin {
     public void load() {
         context = getContext();
         try {
-//            AddObserversToNotificationCenter();
+            //            AddObserversToNotificationCenter();
             implementation = new CapacitorSqlite(context, getConfig());
         } catch (Exception e) {
             implementation = null;
@@ -77,9 +73,9 @@ public class CapacitorSqlitePlugin extends Plugin {
         try {
             if (!dbFile.exists()) {
                 dbFile.createNewFile();
-//                Uri uri = Uri.fromFile(dbFile);
-//                Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, uri);
-//                context.sendBroadcast(intent);
+                //                Uri uri = Uri.fromFile(dbFile);
+                //                Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, uri);
+                //                context.sendBroadcast(intent);
             }
         } catch (IOException e) {
             Log.v(TAG, "create db file failed");
@@ -129,11 +125,10 @@ public class CapacitorSqlitePlugin extends Plugin {
     @PluginMethod
     public void update(PluginCall call) {
         if (implementation != null) {
-            SQLiteEntityUpdateDTO dto = (SQLiteEntityUpdateDTO)SQLiteEntityDTO.from(call);
+            SQLiteEntityUpdateDTO dto = (SQLiteEntityUpdateDTO) SQLiteEntityDTO.from(call);
             try {
                 assert dto != null;
-                dto.setWhereClause(call.getString("whereClause"))
-                .setWhereClauseArgs(call.getArray("whereClauseArgs").toList());
+                dto.setWhereClause(call.getString("whereClause")).setWhereClauseArgs(call.getArray("whereClauseArgs").toList());
             } catch (JSONException e) {
                 Log.e(TAG, e.getLocalizedMessage());
                 callError(call, e.getLocalizedMessage());
@@ -201,6 +196,4 @@ public class CapacitorSqlitePlugin extends Plugin {
             call.reject(e.getLocalizedMessage());
         }
     }
-
-
 }

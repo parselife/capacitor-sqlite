@@ -2,13 +2,26 @@ package cn.stormend.capacitor.plugins.sqlite.support;
 
 public final class SQLiteTypeUtil {
 
-    private SQLiteTypeUtil() {
-    }
+    private SQLiteTypeUtil() {}
 
-    private static final Class<?>[] PRIMITIVE_TYPES = {int.class, long.class, short.class,
-            float.class, double.class, byte.class, boolean.class, char.class, Integer.class, Long.class,
-            Short.class, Float.class, Double.class, Byte.class, Boolean.class, Character.class};
-
+    private static final Class<?>[] PRIMITIVE_TYPES = {
+        int.class,
+        long.class,
+        short.class,
+        float.class,
+        double.class,
+        byte.class,
+        boolean.class,
+        char.class,
+        Integer.class,
+        Long.class,
+        Short.class,
+        Float.class,
+        Double.class,
+        Byte.class,
+        Boolean.class,
+        Character.class
+    };
 
     public static final int TYPE_STRING = 0;
     public static final int TYPE_INT = 1;
@@ -18,7 +31,6 @@ public final class SQLiteTypeUtil {
     public static final int TYPE_BOOL = 5;
     public static final int TYPE_BYTE = 6;
     public static final int TYPE_UNKNOWN = 6;
-
 
     public static int determineType(Class<?> type) {
         if (isPrimitiveOrString(type)) {
@@ -41,7 +53,6 @@ public final class SQLiteTypeUtil {
             return TYPE_UNKNOWN;
         }
     }
-
 
     /**
      * is primitive or not

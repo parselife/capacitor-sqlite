@@ -10,17 +10,14 @@ import static cn.stormend.capacitor.plugins.sqlite.support.SQLiteTypeUtil.determ
 
 import android.content.ContentValues;
 import android.util.Log;
-
 import com.getcapacitor.JSArray;
 import com.getcapacitor.JSObject;
 import com.getcapacitor.PluginCall;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  * 保存数据的载体
@@ -32,7 +29,6 @@ public class SQLiteEntityDTO extends AbstractSQLiteDTO {
      */
     protected List<SQLiteEntityColumn> columns;
 
-
     /**
      * 转换为 dto
      *
@@ -41,16 +37,19 @@ public class SQLiteEntityDTO extends AbstractSQLiteDTO {
      */
     public static SQLiteEntityDTO from(PluginCall call) {
         JSArray array = call.getArray("columns");
-        SQLiteEntityDTO dto = new SQLiteEntityDTO(call.getString("table"));
+        SQLiteEntityDTO dto = new SQLiteEntityDTO(call.getString("tblName"));
         List<SQLiteEntityColumn> entityCols = Collections.emptyList();
         try {
             if (array != null) {
                 entityCols = new ArrayList<>(array.length());
                 for (int i = 0; i < array.length(); i++) {
                     JSONObject object = array.getJSONObject(i);
-                    entityCols.add(new SQLiteEntityColumn().setName(object.getString("name"))
+                    entityCols.add(
+                        new SQLiteEntityColumn()
+                            .setName(object.getString("name"))
                             .setNullable(object.getBoolean("nullable"))
-                            .setValue(object.get("value")));
+                            .setValue(object.get("value"))
+                    );
                 }
             }
         } catch (JSONException e) {
@@ -61,7 +60,6 @@ public class SQLiteEntityDTO extends AbstractSQLiteDTO {
             return null;
         }
         return dto.setColumns(entityCols);
-
     }
 
     /**
@@ -126,7 +124,6 @@ public class SQLiteEntityDTO extends AbstractSQLiteDTO {
     protected SQLiteEntityDTO(String tblName) {
         super(tblName);
     }
-
 
     public List<SQLiteEntityColumn> getColumns() {
         return columns == null ? Collections.emptyList() : columns;

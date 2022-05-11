@@ -6,7 +6,8 @@ import java.util.List;
  * 实体更新对象
  *
  */
-public class SQLiteEntityUpdateDTO  extends SQLiteEntityDTO{
+public class SQLiteEntityUpdateDTO extends SQLiteEntityDTO {
+
     protected SQLiteEntityUpdateDTO(String tblName) {
         super(tblName);
     }
@@ -20,7 +21,6 @@ public class SQLiteEntityUpdateDTO  extends SQLiteEntityDTO{
      * where 条件参数
      */
     private List<String> whereClauseArgs;
-
 
     public String getWhereClause() {
         return whereClause;

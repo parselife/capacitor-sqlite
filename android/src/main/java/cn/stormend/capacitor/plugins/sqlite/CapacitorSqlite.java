@@ -11,19 +11,16 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
-
+import cn.stormend.capacitor.plugins.sqlite.support.SQLiteEntityDTO;
+import cn.stormend.capacitor.plugins.sqlite.support.SQLiteEntityUpdateDTO;
+import cn.stormend.capacitor.plugins.sqlite.support.SQLiteQueryDTO;
 import com.getcapacitor.JSArray;
 import com.getcapacitor.JSObject;
 import com.getcapacitor.PluginConfig;
-
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.function.Function;
-
-import cn.stormend.capacitor.plugins.sqlite.support.SQLiteEntityDTO;
-import cn.stormend.capacitor.plugins.sqlite.support.SQLiteEntityUpdateDTO;
-import cn.stormend.capacitor.plugins.sqlite.support.SQLiteQueryDTO;
 
 public class CapacitorSqlite {
 
@@ -83,8 +80,16 @@ public class CapacitorSqlite {
         if (database == null) {
             return array;
         }
-        Cursor cursor = database.query(dto.getTblName(), dto.getReturnColumns().toArray(new String[0]), dto.getSelection(),
-                dto.getSelectionArgs().toArray(new String[0]), dto.getGroupBy(), dto.getHaving(), dto.getOrderBy(), dto.getLimit());
+        Cursor cursor = database.query(
+            dto.getTblName(),
+            dto.getReturnColumns().toArray(new String[0]),
+            dto.getSelection(),
+            dto.getSelectionArgs().toArray(new String[0]),
+            dto.getGroupBy(),
+            dto.getHaving(),
+            dto.getOrderBy(),
+            dto.getLimit()
+        );
         while (!cursor.isAfterLast()) {
             cursor.moveToNext();
             array.put(cursorToObject(cursor));
@@ -104,8 +109,16 @@ public class CapacitorSqlite {
         if (database == null) {
             return object;
         }
-        Cursor cursor = database.query(dto.getTblName(), dto.getReturnColumns().toArray(new String[0]), dto.getSelection(),
-                dto.getSelectionArgs().toArray(new String[0]), dto.getGroupBy(), dto.getHaving(), dto.getOrderBy(), dto.getLimit());
+        Cursor cursor = database.query(
+            dto.getTblName(),
+            dto.getReturnColumns().toArray(new String[0]),
+            dto.getSelection(),
+            dto.getSelectionArgs().toArray(new String[0]),
+            dto.getGroupBy(),
+            dto.getHaving(),
+            dto.getOrderBy(),
+            dto.getLimit()
+        );
         cursor.moveToNext();
         return cursorToObject(cursor);
     }
@@ -120,8 +133,7 @@ public class CapacitorSqlite {
     public boolean saveEntity(SQLiteEntityDTO entityDTO) {
         SQLiteDatabase db = getNextDatabase();
         if (db != null) {
-            long rowId = db.replaceOrThrow(entityDTO.getTblName(), entityDTO.nullColumnHack(),
-                    entityDTO.convert());
+            long rowId = db.replaceOrThrow(entityDTO.getTblName(), entityDTO.nullColumnHack(), entityDTO.convert());
             return rowId > 0;
         }
         Log.e(TAG, "数据库为null");
@@ -137,8 +149,12 @@ public class CapacitorSqlite {
     public boolean update(SQLiteEntityUpdateDTO updateDTO) {
         SQLiteDatabase db = getNextDatabase();
         if (db != null) {
-            int affected = db.update(updateDTO.getTblName(), updateDTO.convert(), updateDTO.getWhereClause(),
-                    updateDTO.getWhereClauseArgs().toArray(new String[0]));
+            int affected = db.update(
+                updateDTO.getTblName(),
+                updateDTO.convert(),
+                updateDTO.getWhereClause(),
+                updateDTO.getWhereClauseArgs().toArray(new String[0])
+            );
             return affected > 0;
         }
         Log.e(TAG, "数据库为null");

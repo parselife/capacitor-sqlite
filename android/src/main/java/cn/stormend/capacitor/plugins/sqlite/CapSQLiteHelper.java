@@ -3,7 +3,6 @@ package cn.stormend.capacitor.plugins.sqlite;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-
 import androidx.annotation.Nullable;
 
 public class CapSQLiteHelper extends SQLiteOpenHelper {
@@ -17,9 +16,6 @@ public class CapSQLiteHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         // TODO 创建表
-
-
-
 
     }
 

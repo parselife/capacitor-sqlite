@@ -17,7 +17,6 @@ public class SQLiteEntityColumn {
      */
     private boolean nullable;
 
-
     public String getName() {
         return name;
     }

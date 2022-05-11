@@ -10,9 +10,7 @@ public abstract class AbstractSQLiteDTO implements Serializable {
         this.tblName = tblName;
     }
 
-
     public String getTblName() {
         return tblName;
     }
-
 }
