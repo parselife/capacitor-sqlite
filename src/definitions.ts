@@ -1,7 +1,7 @@
 /*
  * @Author: alex
  * @Date: 2022-05-07 13:53:50
- * @LastEditTime: 2022-05-11 15:56:20
+ * @LastEditTime: 2022-05-11 16:13:29
  * @LastEditors: alex
  */
 
@@ -115,8 +115,9 @@ export interface SQLiteQueryOptions {
   limit?: string;
 }
 export interface CapacitorSqlitePlugin {
+  
   /**
-   * echo
+   * 测试方法
    * @param options echo params
    */
   echo(options: { value: string }): Promise<{ value: string }>;

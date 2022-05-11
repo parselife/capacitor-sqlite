@@ -33,7 +33,7 @@ npx cap sync
 echo(options: { value: string; }) => Promise<{ value: string; }>
 ```
 
-echo
+测试方法
 
 | Param         | Type                            | Description |
 | ------------- | ------------------------------- | ----------- |
