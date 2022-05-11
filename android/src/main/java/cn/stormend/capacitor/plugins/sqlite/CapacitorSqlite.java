@@ -34,7 +34,8 @@ public class CapacitorSqlite {
      */
     private static final Map<String, SQLiteDatabase> dbRegistry = new HashMap<>(1);
 
-    public static final int DB_VERSION = 1;
+    // TODO
+    public static final int DB_VERSION = 3;
 
     public CapacitorSqlite(Context context, PluginConfig config) {
         this.context = context;

@@ -93,9 +93,9 @@ public class CapacitorSqlitePlugin extends Plugin {
             callError(call, "移动端存储未挂载");
             return;
         }
-//        File file = context.getDatabasePath(call.getString("dbName"));
-        File extRootFilesDir = Environment.getExternalStorageDirectory();
-        File dbPath = new File(extRootFilesDir, call.getString("dbPath"));
+//  /storage/emulated/0/Android/data/org.capacitor.quasar.app/files
+        File extRootFilesDir = context.getExternalFilesDir(null);
+        File dbPath = new File(extRootFilesDir, call.getString("dbPath", ""));
         if (!dbPath.exists()) {
             // 创建db目录
             dbPath.mkdirs();
