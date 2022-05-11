@@ -13,22 +13,14 @@ npx cap sync
 
 <docgen-index>
 
-- [capacitor-sqlite-android](#capacitor-sqlite-android)
-  - [Install](#install)
-  - [API](#api)
-    - [echo(...)](#echo)
-    - [loadDatabase(...)](#loaddatabase)
-    - [queryForObject(...)](#queryforobject)
-    - [queryForList(...)](#queryforlist)
-    - [insertEntity(...)](#insertentity)
-    - [updateEntity(...)](#updateentity)
-    - [Interfaces](#interfaces)
-      - [SQLiteQueryOptions](#sqlitequeryoptions)
-      - [SQLiteEnitytOptions](#sqliteenitytoptions)
-      - [SQLiteEntityColumn](#sqliteentitycolumn)
-      - [SQLiteEntityUpdateOptions](#sqliteentityupdateoptions)
-    - [Type Aliases](#type-aliases)
-      - [Record](#record)
+* [`echo(...)`](#echo)
+* [`loadDatabase(...)`](#loaddatabase)
+* [`queryForObject(...)`](#queryforobject)
+* [`queryForList(...)`](#queryforlist)
+* [`insertEntity(...)`](#insertentity)
+* [`updateEntity(...)`](#updateentity)
+* [Interfaces](#interfaces)
+* [Type Aliases](#type-aliases)
 
 </docgen-index>
 
@@ -196,8 +188,6 @@ updateEntity(options: SQLiteEntityUpdateOptions) => Promise<{ value: string | bo
 
 Construct a type with a set of properties K of type T
 
-<code>{
- [P in K]: T;
- }</code>
+<code>{ [P in K]: T; }</code>
 
 </docgen-api>
