@@ -1,25 +1,35 @@
 package cn.stormend.capacitor.plugins.sqlite;
 
+import static android.os.Environment.MEDIA_MOUNTED;
+
+import static cn.stormend.capacitor.plugins.sqlite.CapacitorSqlitePlugin.PERMISSION_ALIAS;
+
 import android.Manifest;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.util.Log;
+
 import androidx.annotation.RequiresApi;
+
 import cn.stormend.capacitor.plugins.sqlite.support.SQLiteEntityDTO;
 import cn.stormend.capacitor.plugins.sqlite.support.SQLiteEntityUpdateDTO;
 import cn.stormend.capacitor.plugins.sqlite.support.SQLiteQueryDTO;
+
 import com.getcapacitor.JSArray;
 import com.getcapacitor.JSObject;
+import com.getcapacitor.PermissionState;
 import com.getcapacitor.Plugin;
 import com.getcapacitor.PluginCall;
 import com.getcapacitor.PluginMethod;
 import com.getcapacitor.annotation.CapacitorPlugin;
 import com.getcapacitor.annotation.Permission;
 import com.getcapacitor.annotation.PermissionCallback;
+
 import java.io.File;
 import java.io.IOException;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -32,13 +42,15 @@ import org.json.JSONObject;
  */
 @RequiresApi(api = Build.VERSION_CODES.N)
 @CapacitorPlugin(
-    name = "SqlitePlugin",
-    permissions = { @Permission(strings = { Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE }) }
+        name = "SqlitePlugin",
+        permissions = {@Permission(strings = {Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.READ_EXTERNAL_STORAGE}, alias = PERMISSION_ALIAS)}
 )
 public class CapacitorSqlitePlugin extends Plugin {
 
     private CapacitorSqlite implementation;
     private static final String TAG = CapacitorSqlitePlugin.class.getName();
+    public static final String PERMISSION_ALIAS = "rw";
     private Context context;
     private String message = "";
 
@@ -63,7 +75,27 @@ public class CapacitorSqlitePlugin extends Plugin {
     @PermissionCallback
     @PluginMethod
     public void loadDatabase(PluginCall call) {
-        File extRootFilesDir = context.getExternalFilesDir(null);
+        if (getPermissionState(PERMISSION_ALIAS) != PermissionState.GRANTED) {
+            requestPermissionForAlias(PERMISSION_ALIAS, call, "callback");
+        } else {
+            loadDatabase0(call);
+        }
+    }
+
+    @PermissionCallback
+    private void callback(PluginCall call) {
+        loadDatabase0(call);
+    }
+
+    private void loadDatabase0(PluginCall call) {
+        String storageState = Environment.getExternalStorageState();
+        if (!MEDIA_MOUNTED.equals(storageState)) {
+            Log.e(TAG, "移动端存储未挂载!");
+            callError(call, "移动端存储未挂载");
+            return;
+        }
+//        File file = context.getDatabasePath(call.getString("dbName"));
+        File extRootFilesDir = Environment.getExternalStorageDirectory();
         File dbPath = new File(extRootFilesDir, call.getString("dbPath"));
         if (!dbPath.exists()) {
             // 创建db目录
@@ -73,9 +105,6 @@ public class CapacitorSqlitePlugin extends Plugin {
         try {
             if (!dbFile.exists()) {
                 dbFile.createNewFile();
-                //                Uri uri = Uri.fromFile(dbFile);
-                //                Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, uri);
-                //                context.sendBroadcast(intent);
             }
         } catch (IOException e) {
             Log.v(TAG, "create db file failed");
