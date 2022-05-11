@@ -72,7 +72,6 @@ public class CapacitorSqlitePlugin extends Plugin {
      *
      * @param call
      */
-    @PermissionCallback
     @PluginMethod
     public void loadDatabase(PluginCall call) {
         if (getPermissionState(PERMISSION_ALIAS) != PermissionState.GRANTED) {
