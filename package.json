@@ -1,5 +1,5 @@
 {
-  "name": "capacitor-sqlite",
+  "name": "capacitor-sqlite-android",
   "version": "0.0.1",
   "description": "sqlite",
   "main": "dist/plugin.cjs.js",

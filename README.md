@@ -1,11 +1,11 @@
-# capacitor-sqlite
+# capacitor-sqlite-android
 
 sqlite
 
 ## Install
 
 ```bash
-npm install capacitor-sqlite
+npm install capacitor-sqlite-android
 npx cap sync
 ```
 
@@ -13,14 +13,22 @@ npx cap sync
 
 <docgen-index>
 
-* [`echo(...)`](#echo)
-* [`loadDatabase(...)`](#loaddatabase)
-* [`queryForObject(...)`](#queryforobject)
-* [`queryForList(...)`](#queryforlist)
-* [`insertEntity(...)`](#insertentity)
-* [`updateEntity(...)`](#updateentity)
-* [Interfaces](#interfaces)
-* [Type Aliases](#type-aliases)
+- [capacitor-sqlite-android](#capacitor-sqlite-android)
+  - [Install](#install)
+  - [API](#api)
+    - [echo(...)](#echo)
+    - [loadDatabase(...)](#loaddatabase)
+    - [queryForObject(...)](#queryforobject)
+    - [queryForList(...)](#queryforlist)
+    - [insertEntity(...)](#insertentity)
+    - [updateEntity(...)](#updateentity)
+    - [Interfaces](#interfaces)
+      - [SQLiteQueryOptions](#sqlitequeryoptions)
+      - [SQLiteEnitytOptions](#sqliteenitytoptions)
+      - [SQLiteEntityColumn](#sqliteentitycolumn)
+      - [SQLiteEntityUpdateOptions](#sqliteentityupdateoptions)
+    - [Type Aliases](#type-aliases)
+      - [Record](#record)
 
 </docgen-index>
 
@@ -188,6 +196,8 @@ updateEntity(options: SQLiteEntityUpdateOptions) => Promise<{ value: string | bo
 
 Construct a type with a set of properties K of type T
 
-<code>{ [P in K]: T; }</code>
+<code>{
+ [P in K]: T;
+ }</code>
 
 </docgen-api>
