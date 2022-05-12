@@ -11,12 +11,15 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+
 import cn.stormend.capacitor.plugins.sqlite.support.SQLiteEntityDTO;
 import cn.stormend.capacitor.plugins.sqlite.support.SQLiteEntityUpdateDTO;
 import cn.stormend.capacitor.plugins.sqlite.support.SQLiteQueryDTO;
+
 import com.getcapacitor.JSArray;
 import com.getcapacitor.JSObject;
 import com.getcapacitor.PluginConfig;
+
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -82,14 +85,14 @@ public class CapacitorSqlite {
             return array;
         }
         Cursor cursor = database.query(
-            dto.getTblName(),
-            dto.getReturnColumns().toArray(new String[0]),
-            dto.getSelection(),
-            dto.getSelectionArgs().toArray(new String[0]),
-            dto.getGroupBy(),
-            dto.getHaving(),
-            dto.getOrderBy(),
-            dto.getLimit()
+                dto.getTblName(),
+                dto.getReturnColumns().toArray(new String[0]),
+                dto.getSelection(),
+                dto.getSelectionArgs().toArray(new String[0]),
+                dto.getGroupBy(),
+                dto.getHaving(),
+                dto.getOrderBy(),
+                dto.getLimit() != null ? dto.getLimit().toString() : null
         );
         while (!cursor.isAfterLast()) {
             cursor.moveToNext();
@@ -111,14 +114,14 @@ public class CapacitorSqlite {
             return object;
         }
         Cursor cursor = database.query(
-            dto.getTblName(),
-            dto.getReturnColumns().toArray(new String[0]),
-            dto.getSelection(),
-            dto.getSelectionArgs().toArray(new String[0]),
-            dto.getGroupBy(),
-            dto.getHaving(),
-            dto.getOrderBy(),
-            dto.getLimit()
+                dto.getTblName(),
+                dto.getReturnColumns().toArray(new String[0]),
+                dto.getSelection(),
+                dto.getSelectionArgs().toArray(new String[0]),
+                dto.getGroupBy(),
+                dto.getHaving(),
+                dto.getOrderBy(),
+                "1"
         );
         cursor.moveToNext();
         return cursorToObject(cursor);
@@ -151,10 +154,10 @@ public class CapacitorSqlite {
         SQLiteDatabase db = getNextDatabase();
         if (db != null) {
             int affected = db.update(
-                updateDTO.getTblName(),
-                updateDTO.convert(),
-                updateDTO.getWhereClause(),
-                updateDTO.getWhereClauseArgs().toArray(new String[0])
+                    updateDTO.getTblName(),
+                    updateDTO.convert(),
+                    updateDTO.getWhereClause(),
+                    updateDTO.getWhereClauseArgs().toArray(new String[0])
             );
             return affected > 0;
         }

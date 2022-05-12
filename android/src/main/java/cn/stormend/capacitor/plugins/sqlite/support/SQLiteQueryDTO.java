@@ -28,27 +28,27 @@ public class SQLiteQueryDTO extends AbstractSQLiteDTO {
 
     /**
      * groupby 语句
-     * eg: group by A
+     * eg: name
      */
     private String groupBy;
 
     /**
-     * having 语句
-     * eg: Having...
+     * HAVING 子句可以让我们筛选分组后的各组数据
+     * eg: sum(area) > 20
      */
     private String having;
 
     /**
      * order by 语句
-     * eg: order by A
+     * eg: name desc
      */
     private String orderBy;
 
     /**
-     * limit 语句
-     * eg: LIMIT 10
+     * limit 数量
+     * eg: 10
      */
-    private String limit;
+    private Integer limit;
 
     /**
      * 装配成 DTO
@@ -76,7 +76,7 @@ public class SQLiteQueryDTO extends AbstractSQLiteDTO {
             .setGroupBy(call.getString("groupBy"))
             .setHaving(call.getString("having"))
             .setOrderBy(call.getString("orderBy"))
-            .setLimit(call.getString("limit"));
+            .setLimit(call.getInt("limit"));
         return dto;
     }
 
@@ -98,11 +98,11 @@ public class SQLiteQueryDTO extends AbstractSQLiteDTO {
         return this;
     }
 
-    public String getLimit() {
+    public Integer getLimit() {
         return limit;
     }
 
-    public SQLiteQueryDTO setLimit(String limit) {
+    public SQLiteQueryDTO setLimit(Integer limit) {
         this.limit = limit;
         return this;
     }
