@@ -47,14 +47,14 @@ echo(options: { value: string; }) => Promise<{ value: string; }>
 ### loadDatabase(...)
 
 ```typescript
-loadDatabase(options: { dbPath: string; dbName: string; }) => Promise<{ value: string | boolean; }>
+loadDatabase(options: { dbPath?: string; dbName: string; }) => Promise<{ value: string | boolean; }>
 ```
 
 加载数据库
 
-| Param         | Type                                             | Description                   |
-| ------------- | ------------------------------------------------ | ----------------------------- |
-| **`options`** | <code>{ dbPath: string; dbName: string; }</code> | dbPath: 数据库文件位置 dbName: 数据文件名 |
+| Param         | Type                                              | Description                   |
+| ------------- | ------------------------------------------------- | ----------------------------- |
+| **`options`** | <code>{ dbPath?: string; dbName: string; }</code> | dbPath: 数据库文件位置 dbName: 数据文件名 |
 
 **Returns:** <code>Promise&lt;{ value: string | boolean; }&gt;</code>
 

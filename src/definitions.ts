@@ -1,7 +1,7 @@
 /*
  * @Author: alex
  * @Date: 2022-05-07 13:53:50
- * @LastEditTime: 2022-05-12 00:02:38
+ * @LastEditTime: 2022-05-12 13:49:53
  * @LastEditors: alex
  */
 
@@ -92,27 +92,27 @@ export interface SQLiteQueryOptions {
 
   /**
    * groupby 语句
-   * eg: group by A
+   * eg:  name
    */
   groupBy?: string;
 
   /**
    * having 语句
-   * eg: Having...
+   * eg: sum(area) > 20
    */
   having?: string;
 
   /**
    * order by 语句
-   * eg: order by A
+   * eg: time desc
    */
   orderBy?: string;
 
   /**
-   *  limit 语句
-   * eg: LIMIT 10
+   *  limit 数量
+   * eg: 10
    */
-  limit?: string;
+  limit?: number;
 }
 export interface CapacitorSqlitePlugin {
   
