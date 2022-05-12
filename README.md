@@ -47,7 +47,7 @@ echo(options: { value: string; }) => Promise<{ value: string; }>
 ### loadDatabase(...)
 
 ```typescript
-loadDatabase(options: { dbPath?: string; dbName: string; }) => Promise<{ value: string | boolean; }>
+loadDatabase(options: { dbPath?: string; dbName: string; }) => Promise<{ data: string | boolean; }>
 ```
 
 加载数据库
@@ -56,7 +56,7 @@ loadDatabase(options: { dbPath?: string; dbName: string; }) => Promise<{ value: 
 | ------------- | ------------------------------------------------- | ----------------------------- |
 | **`options`** | <code>{ dbPath?: string; dbName: string; }</code> | dbPath: 数据库文件位置 dbName: 数据文件名 |
 
-**Returns:** <code>Promise&lt;{ value: string | boolean; }&gt;</code>
+**Returns:** <code>Promise&lt;{ data: string | boolean; }&gt;</code>
 
 --------------------
 
@@ -64,7 +64,7 @@ loadDatabase(options: { dbPath?: string; dbName: string; }) => Promise<{ value: 
 ### queryForObject(...)
 
 ```typescript
-queryForObject(options: SQLiteQueryOptions) => Promise<{ value: Record<string, unknown>; }>
+queryForObject(options: SQLiteQueryOptions) => Promise<{ data: Record<string, unknown>; }>
 ```
 
 查询单个对象
@@ -73,7 +73,7 @@ queryForObject(options: SQLiteQueryOptions) => Promise<{ value: Record<string, u
 | ------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- |
 | **`options`** | <code><a href="#sqlitequeryoptions">SQLiteQueryOptions</a></code> | 查询参数 {@link <a href="#sqlitequeryoptions">SQLiteQueryOptions</a>} |
 
-**Returns:** <code>Promise&lt;{ value: <a href="#record">Record</a>&lt;string, unknown&gt;; }&gt;</code>
+**Returns:** <code>Promise&lt;{ data: <a href="#record">Record</a>&lt;string, unknown&gt;; }&gt;</code>
 
 --------------------
 
@@ -81,7 +81,7 @@ queryForObject(options: SQLiteQueryOptions) => Promise<{ value: Record<string, u
 ### queryForList(...)
 
 ```typescript
-queryForList(options: SQLiteQueryOptions) => Promise<{ value: Record<string, unknown>[]; }>
+queryForList(options: SQLiteQueryOptions) => Promise<{ data: Record<string, unknown>[]; }>
 ```
 
 查询列表
@@ -90,7 +90,7 @@ queryForList(options: SQLiteQueryOptions) => Promise<{ value: Record<string, unk
 | ------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- |
 | **`options`** | <code><a href="#sqlitequeryoptions">SQLiteQueryOptions</a></code> | 查询参数 {@link <a href="#sqlitequeryoptions">SQLiteQueryOptions</a>} |
 
-**Returns:** <code>Promise&lt;{ value: <a href="#record">Record</a>&lt;string, unknown&gt;[]; }&gt;</code>
+**Returns:** <code>Promise&lt;{ data: <a href="#record">Record</a>&lt;string, unknown&gt;[]; }&gt;</code>
 
 --------------------
 
@@ -98,7 +98,7 @@ queryForList(options: SQLiteQueryOptions) => Promise<{ value: Record<string, unk
 ### insertEntity(...)
 
 ```typescript
-insertEntity(options: SQLiteEnitytOptions) => Promise<{ value: string | boolean; }>
+insertEntity(options: SQLiteEnitytOptions) => Promise<{ data: string | boolean; }>
 ```
 
 保存实体
@@ -107,7 +107,7 @@ insertEntity(options: SQLiteEnitytOptions) => Promise<{ value: string | boolean;
 | ------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
 | **`options`** | <code><a href="#sqliteenitytoptions">SQLiteEnitytOptions</a></code> | 实体参数 {@link <a href="#sqliteenitytoptions">SQLiteEnitytOptions</a>} |
 
-**Returns:** <code>Promise&lt;{ value: string | boolean; }&gt;</code>
+**Returns:** <code>Promise&lt;{ data: string | boolean; }&gt;</code>
 
 --------------------
 
@@ -115,7 +115,7 @@ insertEntity(options: SQLiteEnitytOptions) => Promise<{ value: string | boolean;
 ### updateEntity(...)
 
 ```typescript
-updateEntity(options: SQLiteEntityUpdateOptions) => Promise<{ value: string | boolean; }>
+updateEntity(options: SQLiteEntityUpdateOptions) => Promise<{ data: string | boolean; }>
 ```
 
 更新实体
@@ -124,7 +124,7 @@ updateEntity(options: SQLiteEntityUpdateOptions) => Promise<{ value: string | bo
 | ------------- | ------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
 | **`options`** | <code><a href="#sqliteentityupdateoptions">SQLiteEntityUpdateOptions</a></code> | 更新实体参数 {@link <a href="#sqliteentityupdateoptions">SQLiteEntityUpdateOptions</a>} |
 
-**Returns:** <code>Promise&lt;{ value: string | boolean; }&gt;</code>
+**Returns:** <code>Promise&lt;{ data: string | boolean; }&gt;</code>
 
 --------------------
 

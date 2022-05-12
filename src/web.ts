@@ -1,7 +1,7 @@
 /*
  * @Author: alex
  * @Date: 2022-05-07 13:53:50
- * @LastEditTime: 2022-05-11 16:06:42
+ * @LastEditTime: 2022-05-12 14:28:00
  * @LastEditors: alex
  */
 import { WebPlugin } from '@capacitor/core';
@@ -18,37 +18,37 @@ export class SqlitePluginWeb
   implements CapacitorSqlitePlugin {
   async updateEntity(
     options: SQLiteEntityUpdateOptions,
-  ): Promise<{ value: string | boolean }> {
+  ): Promise<{ data: string | boolean }> {
     console.log(options);
-    return { value: 'not supported' };
+    return { data: 'not supported' };
   }
   async insertEntity(
     options: SQLiteEnitytOptions,
-  ): Promise<{ value: string | boolean }> {
+  ): Promise<{ data: string | boolean }> {
     console.log(options);
-    return { value: 'not supported' };
+    return { data: 'not supported' };
   }
 
   async queryForList(
     options: SQLiteQueryOptions,
-  ): Promise<{ value: Record<string, unknown>[] }> {
+  ): Promise<{ data: Record<string, unknown>[] }> {
     console.log(options);
-    return { value: [{ data: 'not supported' }] };
+    return { data: [{ data: 'not supported' }] };
   }
 
   async queryForObject(
     options: SQLiteQueryOptions,
-  ): Promise<{ value: Record<string, unknown> }> {
+  ): Promise<{ data: Record<string, unknown> }> {
     console.log(options);
-    return { value: { data: 'not supported' } };
+    return { data: { data: 'not supported' } };
   }
 
   async loadDatabase(options: {
     dbPath: string;
     dbName: string;
-  }): Promise<{ value: string | boolean }> {
+  }): Promise<{ data: string | boolean }> {
     console.log(options);
-    return { value: 'not supported' };
+    return { data: 'not supported' };
   }
 
   /**
