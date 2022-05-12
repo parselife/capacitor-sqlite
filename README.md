@@ -136,16 +136,16 @@ updateEntity(options: SQLiteEntityUpdateOptions) => Promise<{ value: string | bo
 
 数据库查询对象
 
-| Prop                | Type                  | Description                  |
-| ------------------- | --------------------- | ---------------------------- |
-| **`tblName`**       | <code>string</code>   | 操作表名                         |
-| **`selection`**     | <code>string</code>   | 查询条件 eg: a=? and b like '%?' |
-| **`selectionArgs`** | <code>string[]</code> | 查询的参数 替换 selection 中的 ?      |
-| **`returnColumns`** | <code>string[]</code> | 返回的列名 为空则返回所有                |
-| **`groupBy`**       | <code>string</code>   | groupby 语句 eg: group by A    |
-| **`having`**        | <code>string</code>   | having 语句 eg: Having...      |
-| **`orderBy`**       | <code>string</code>   | order by 语句 eg: order by A   |
-| **`limit`**         | <code>string</code>   | limit 语句 eg: LIMIT 10        |
+| Prop                | Type                  | Description                     |
+| ------------------- | --------------------- | ------------------------------- |
+| **`tblName`**       | <code>string</code>   | 操作表名                            |
+| **`selection`**     | <code>string</code>   | 查询条件 eg: a=? and b like '%?'    |
+| **`selectionArgs`** | <code>string[]</code> | 查询的参数 替换 selection 中的 ?         |
+| **`returnColumns`** | <code>string[]</code> | 返回的列名 为空则返回所有                   |
+| **`groupBy`**       | <code>string</code>   | groupby 语句 eg: name             |
+| **`having`**        | <code>string</code>   | having 语句 eg: sum(area) &gt; 20 |
+| **`orderBy`**       | <code>string</code>   | order by 语句 eg: time desc       |
+| **`limit`**         | <code>number</code>   | limit 数量 eg: 10                 |
 
 
 #### SQLiteEnitytOptions
