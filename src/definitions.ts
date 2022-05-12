@@ -1,7 +1,7 @@
 /*
  * @Author: alex
  * @Date: 2022-05-07 13:53:50
- * @LastEditTime: 2022-05-12 13:49:53
+ * @LastEditTime: 2022-05-12 14:25:44
  * @LastEditors: alex
  */
 
@@ -129,7 +129,7 @@ export interface CapacitorSqlitePlugin {
   loadDatabase(options: {
     dbPath?: string;
     dbName: string;
-  }): Promise<{ value: string | boolean }>;
+  }): Promise<{ data: string | boolean }>;
 
   /**
    * 查询单个对象
@@ -137,7 +137,7 @@ export interface CapacitorSqlitePlugin {
    */
   queryForObject(
     options: SQLiteQueryOptions,
-  ): Promise<{ value: Record<string, unknown> }>;
+  ): Promise<{ data: Record<string, unknown> }>;
 
   /**
    * 查询列表
@@ -145,7 +145,7 @@ export interface CapacitorSqlitePlugin {
    */
   queryForList(
     options: SQLiteQueryOptions,
-  ): Promise<{ value: Record<string, unknown>[] }>;
+  ): Promise<{ data: Record<string, unknown>[] }>;
 
   /**
    * 保存实体
@@ -153,7 +153,7 @@ export interface CapacitorSqlitePlugin {
    */
   insertEntity(
     options: SQLiteEnitytOptions,
-  ): Promise<{ value: string | boolean }>;
+  ): Promise<{ data: string | boolean }>;
 
   /**
    * 更新实体
@@ -161,5 +161,5 @@ export interface CapacitorSqlitePlugin {
    */
   updateEntity(
     options: SQLiteEntityUpdateOptions,
-  ): Promise<{ value: string | boolean }>;
+  ): Promise<{ data: string | boolean }>;
 }
