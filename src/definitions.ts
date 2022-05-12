@@ -1,7 +1,7 @@
 /*
  * @Author: alex
  * @Date: 2022-05-07 13:53:50
- * @LastEditTime: 2022-05-12 14:25:44
+ * @LastEditTime: 2022-05-12 14:39:03
  * @LastEditors: alex
  */
 
@@ -137,7 +137,7 @@ export interface CapacitorSqlitePlugin {
    */
   queryForObject(
     options: SQLiteQueryOptions,
-  ): Promise<{ data: Record<string, unknown> }>;
+  ): Promise<{ data: any }>;
 
   /**
    * 查询列表
@@ -145,7 +145,7 @@ export interface CapacitorSqlitePlugin {
    */
   queryForList(
     options: SQLiteQueryOptions,
-  ): Promise<{ data: Record<string, unknown>[] }>;
+  ): Promise<{ data: any[] }>;
 
   /**
    * 保存实体

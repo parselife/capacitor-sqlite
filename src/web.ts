@@ -1,7 +1,7 @@
 /*
  * @Author: alex
  * @Date: 2022-05-07 13:53:50
- * @LastEditTime: 2022-05-12 14:28:00
+ * @LastEditTime: 2022-05-12 14:39:27
  * @LastEditors: alex
  */
 import { WebPlugin } from '@capacitor/core';
@@ -31,14 +31,14 @@ export class SqlitePluginWeb
 
   async queryForList(
     options: SQLiteQueryOptions,
-  ): Promise<{ data: Record<string, unknown>[] }> {
+  ): Promise<{ data: any[] }> {
     console.log(options);
     return { data: [{ data: 'not supported' }] };
   }
 
   async queryForObject(
     options: SQLiteQueryOptions,
-  ): Promise<{ data: Record<string, unknown> }> {
+  ): Promise<{ data: any }> {
     console.log(options);
     return { data: { data: 'not supported' } };
   }
