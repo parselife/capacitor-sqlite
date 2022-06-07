@@ -20,7 +20,6 @@ npx cap sync
 * [`insertEntity(...)`](#insertentity)
 * [`updateEntity(...)`](#updateentity)
 * [Interfaces](#interfaces)
-* [Type Aliases](#type-aliases)
 
 </docgen-index>
 
@@ -64,7 +63,7 @@ loadDatabase(options: { dbPath?: string; dbName: string; }) => Promise<{ data: s
 ### queryForObject(...)
 
 ```typescript
-queryForObject(options: SQLiteQueryOptions) => Promise<{ data: Record<string, unknown>; }>
+queryForObject(options: SQLiteQueryOptions) => Promise<{ data: any; }>
 ```
 
 查询单个对象
@@ -73,7 +72,7 @@ queryForObject(options: SQLiteQueryOptions) => Promise<{ data: Record<string, un
 | ------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- |
 | **`options`** | <code><a href="#sqlitequeryoptions">SQLiteQueryOptions</a></code> | 查询参数 {@link <a href="#sqlitequeryoptions">SQLiteQueryOptions</a>} |
 
-**Returns:** <code>Promise&lt;{ data: <a href="#record">Record</a>&lt;string, unknown&gt;; }&gt;</code>
+**Returns:** <code>Promise&lt;{ data: any; }&gt;</code>
 
 --------------------
 
@@ -81,7 +80,7 @@ queryForObject(options: SQLiteQueryOptions) => Promise<{ data: Record<string, un
 ### queryForList(...)
 
 ```typescript
-queryForList(options: SQLiteQueryOptions) => Promise<{ data: Record<string, unknown>[]; }>
+queryForList(options: SQLiteQueryOptions) => Promise<{ data: any[]; }>
 ```
 
 查询列表
@@ -90,7 +89,7 @@ queryForList(options: SQLiteQueryOptions) => Promise<{ data: Record<string, unkn
 | ------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- |
 | **`options`** | <code><a href="#sqlitequeryoptions">SQLiteQueryOptions</a></code> | 查询参数 {@link <a href="#sqlitequeryoptions">SQLiteQueryOptions</a>} |
 
-**Returns:** <code>Promise&lt;{ data: <a href="#record">Record</a>&lt;string, unknown&gt;[]; }&gt;</code>
+**Returns:** <code>Promise&lt;{ data: any[]; }&gt;</code>
 
 --------------------
 
@@ -179,15 +178,5 @@ updateEntity(options: SQLiteEntityUpdateOptions) => Promise<{ data: string | boo
 | **`columns`**         | <code>SQLiteEntityColumn[]</code> | 保存的数据列 {@link <a href="#sqliteentitycolumn">SQLiteEntityColumn</a>} |
 | **`whereClause`**     | <code>string</code>               | where 条件 eg: id=?                                                   |
 | **`whereClauseArgs`** | <code>string[]</code>             | where 条件参数 ? 的值                                                     |
-
-
-### Type Aliases
-
-
-#### Record
-
-Construct a type with a set of properties K of type T
-
-<code>{ [P in K]: T; }</code>
 
 </docgen-api>
