@@ -151,9 +151,14 @@ public class CapacitorSqlitePlugin extends Plugin {
     }
 
     @PluginMethod
-    public void update(PluginCall call) {
+    public void updateEntity(PluginCall call) {
         if (implementation != null) {
-            SQLiteEntityUpdateDTO dto = (SQLiteEntityUpdateDTO) SQLiteEntityDTO.from(call);
+
+          SQLiteEntityDTO sqLiteEntityDTO = SQLiteEntityDTO.from(call);
+          SQLiteEntityUpdateDTO dto = new SQLiteEntityUpdateDTO(sqLiteEntityDTO.getTblName());
+          dto.setColumns(sqLiteEntityDTO.getColumns());
+
+
             try {
                 assert dto != null;
                 dto.setWhereClause(call.getString("whereClause")).setWhereClauseArgs(call.getArray("whereClauseArgs").toList());
