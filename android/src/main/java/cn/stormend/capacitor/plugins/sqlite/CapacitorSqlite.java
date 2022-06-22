@@ -94,10 +94,13 @@ public class CapacitorSqlite {
                 dto.getOrderBy(),
                 dto.getLimit() != null ? dto.getLimit().toString() : null
         );
-        while (!cursor.isLast()) {
+        if (cursor.getCount()>0){
+          while (!cursor.isLast()) {
             cursor.moveToNext();
             array.put(cursorToObject(cursor));
+          }
         }
+
         return array;
     }
 
