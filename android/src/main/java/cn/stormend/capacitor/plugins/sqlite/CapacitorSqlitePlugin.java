@@ -151,6 +151,23 @@ public class CapacitorSqlitePlugin extends Plugin {
   }
 
   @PluginMethod
+  public void delEntity(PluginCall call)  {
+    if (implementation != null) {
+      SQLiteEntityDTO dto = SQLiteEntityDTO.from(call);
+      try {
+        JSArray selectionArgs = call.getArray("selectionArgs");
+        String[] whereArgs = selectionArgs.join("/").split("/");
+        int b = implementation.delEntity(call.getString("tblName"),call.getString("selection"),whereArgs);
+        callSingleValue(call, b);
+      } catch (JSONException e) {
+        callError(call, e.getMessage());
+      }
+    } else {
+      callError(call, "plugin is null");
+    }
+  }
+
+  @PluginMethod
   public void updateEntity(PluginCall call) {
     if (implementation != null) {
 
