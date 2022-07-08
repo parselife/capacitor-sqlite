@@ -94,10 +94,13 @@ public class CapacitorSqlite {
                 dto.getOrderBy(),
                 dto.getLimit() != null ? dto.getLimit().toString() : null
         );
-        while (!cursor.isLast()) {
+        if (cursor.getCount()>0){
+          while (!cursor.isLast()) {
             cursor.moveToNext();
             array.put(cursorToObject(cursor));
+          }
         }
+
         return array;
     }
 
@@ -143,6 +146,24 @@ public class CapacitorSqlite {
         Log.e(TAG, "数据库为null");
         return false;
     }
+
+  /**
+   * 删除数据
+   * delete entity
+   *
+   * @param table 表名
+   * @param whereClause eg: a=? and b like '%?'
+   * @param whereArgs 查询的参数 替换 selection 中的 ?
+   * @return 被删除的记录数
+   */
+  public int delEntity(String table, String whereClause, String[] whereArgs) {
+    SQLiteDatabase db = getNextDatabase();
+    if (db != null) {
+      return db.delete(table,whereClause,whereArgs);
+    }
+    Log.e(TAG, "数据库为null");
+    return 0;
+  }
 
     /**
      * 更新数据

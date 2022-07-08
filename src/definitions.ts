@@ -1,8 +1,8 @@
 /*
  * @Author: alex
  * @Date: 2022-05-07 13:53:50
- * @LastEditTime: 2022-05-12 14:39:03
- * @LastEditors: alex
+ * @LastEditTime: 2022-07-07 15:19:20
+ * @LastEditors: maqingyi
  */
 
 /**
@@ -160,6 +160,14 @@ export interface CapacitorSqlitePlugin {
    * @param options 更新实体参数 {@link SQLiteEntityUpdateOptions}
    */
   updateEntity(
+    options: SQLiteEntityUpdateOptions,
+  ): Promise<{ data: string | boolean }>;
+
+  /**
+   * 删除实体
+   * @param options 更新实体参数 {@link SQLiteEntityUpdateOptions}
+   */
+   delEntity(
     options: SQLiteEntityUpdateOptions,
   ): Promise<{ data: string | boolean }>;
 }

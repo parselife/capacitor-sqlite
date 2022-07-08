@@ -1,8 +1,8 @@
 /*
  * @Author: alex
  * @Date: 2022-05-07 13:53:50
- * @LastEditTime: 2022-05-12 14:39:27
- * @LastEditors: alex
+ * @LastEditTime: 2022-07-07 15:20:30
+ * @LastEditors: maqingyi
  */
 import { WebPlugin } from '@capacitor/core';
 
@@ -22,6 +22,14 @@ export class SqlitePluginWeb
     console.log(options);
     return { data: 'not supported' };
   }
+
+  async delEntity(
+    options: SQLiteEntityUpdateOptions,
+  ): Promise<{ data: string | boolean }> {
+    console.log(options);
+    return { data: 'not supported' };
+  }
+
   async insertEntity(
     options: SQLiteEnitytOptions,
   ): Promise<{ data: string | boolean }> {
