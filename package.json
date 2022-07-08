@@ -1,6 +1,6 @@
 {
   "name": "capacitor-sqlite-android",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "sqlite",
   "main": "dist/plugin.cjs.js",
   "module": "dist/esm/index.js",

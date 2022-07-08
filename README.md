@@ -19,6 +19,7 @@ npx cap sync
 * [`queryForList(...)`](#queryforlist)
 * [`insertEntity(...)`](#insertentity)
 * [`updateEntity(...)`](#updateentity)
+* [`delEntity(...)`](#delentity)
 * [Interfaces](#interfaces)
 
 </docgen-index>
@@ -118,6 +119,23 @@ updateEntity(options: SQLiteEntityUpdateOptions) => Promise<{ data: string | boo
 ```
 
 更新实体
+
+| Param         | Type                                                                            | Description                                                                       |
+| ------------- | ------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| **`options`** | <code><a href="#sqliteentityupdateoptions">SQLiteEntityUpdateOptions</a></code> | 更新实体参数 {@link <a href="#sqliteentityupdateoptions">SQLiteEntityUpdateOptions</a>} |
+
+**Returns:** <code>Promise&lt;{ data: string | boolean; }&gt;</code>
+
+--------------------
+
+
+### delEntity(...)
+
+```typescript
+delEntity(options: SQLiteEntityUpdateOptions) => Promise<{ data: string | boolean; }>
+```
+
+删除实体
 
 | Param         | Type                                                                            | Description                                                                       |
 | ------------- | ------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
