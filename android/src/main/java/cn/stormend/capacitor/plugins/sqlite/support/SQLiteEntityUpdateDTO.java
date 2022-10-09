@@ -1,3 +1,10 @@
+/*
+ * @Author: maqingyi
+ * @Date: 2022-06-08 09:41:42
+ * @LastEditors: maqingyi
+ * @LastEditTime: 2022-10-09 14:40:32
+ * @Description: file content
+ */
 package cn.stormend.capacitor.plugins.sqlite.support;
 
 import java.util.List;
@@ -8,7 +15,7 @@ import java.util.List;
  */
 public class SQLiteEntityUpdateDTO extends SQLiteEntityDTO {
 
-    protected SQLiteEntityUpdateDTO(String tblName) {
+    public SQLiteEntityUpdateDTO(String tblName) {
         super(tblName);
     }
 
