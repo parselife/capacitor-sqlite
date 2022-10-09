@@ -29,6 +29,9 @@ import com.getcapacitor.annotation.PermissionCallback;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -153,11 +156,12 @@ public class CapacitorSqlitePlugin extends Plugin {
   @PluginMethod
   public void delEntity(PluginCall call)  {
     if (implementation != null) {
-      SQLiteEntityDTO dto = SQLiteEntityDTO.from(call);
       try {
-        JSArray selectionArgs = call.getArray("selectionArgs");
-        String[] whereArgs = selectionArgs.join("/").split("/");
-        int b = implementation.delEntity(call.getString("tblName"),call.getString("selection"),whereArgs);
+        JSArray selectionArgs = call.getArray("whereClauseArgs");
+        List<String> list = selectionArgs.toList();
+        String[] arr = new String[list.size()];
+        String[] strings = list.toArray(arr);
+        int b = implementation.delEntity(call.getString("tblName"),call.getString("whereClause"),strings);
         callSingleValue(call, b);
       } catch (JSONException e) {
         callError(call, e.getMessage());
