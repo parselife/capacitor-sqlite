@@ -37,6 +37,12 @@ public class CapacitorSqlite {
      */
     private static final Map<String, SQLiteDatabase> dbRegistry = new HashMap<>(1);
 
+
+    /*
+    * 用于记录最后一次连接的db
+    * */
+    private String currentDb;
+
     // TODO
     public static final int DB_VERSION = 3;
 
@@ -62,6 +68,7 @@ public class CapacitorSqlite {
      * @return
      */
     public boolean loadSQLiteDatabase(String dbFile) {
+        currentDb = dbFile;
         if (!dbRegistry.containsKey(dbFile)) {
             CapSQLiteHelper sqLiteOpenHelper = new CapSQLiteHelper(context, dbFile, null, DB_VERSION);
             SQLiteDatabase db = sqLiteOpenHelper.getWritableDatabase();
@@ -223,6 +230,10 @@ public class CapacitorSqlite {
      * @return
      */
     private SQLiteDatabase getNextDatabase() {
+        if(dbRegistry.containsKey(currentDb)){
+          return  dbRegistry.get(currentDb);
+        }
+
         Iterator<SQLiteDatabase> iterator = dbRegistry.values().iterator();
         if (iterator.hasNext()) {
             return iterator.next();
