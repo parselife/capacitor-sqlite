@@ -125,8 +125,12 @@ public class CapacitorSqlitePlugin extends Plugin {
   @PluginMethod
   public void queryForList(PluginCall call) {
     if (implementation != null) {
-      JSArray array = implementation.queryForList(SQLiteQueryDTO.from(call));
-      callSingleValue(call, array);
+      try {
+        JSArray array = implementation.queryForList(SQLiteQueryDTO.from(call));
+        callSingleValue(call, array);
+      } catch (Exception e){
+        callSingleValue(call, e.getMessage());
+      }
     } else {
       callError(call, "plugin is null");
     }
@@ -135,8 +139,12 @@ public class CapacitorSqlitePlugin extends Plugin {
   @PluginMethod
   public void queryForObject(PluginCall call) {
     if (implementation != null) {
-      JSObject object = implementation.queryForObject(SQLiteQueryDTO.from(call));
-      callSingleValue(call, object);
+      try {
+        JSObject object = implementation.queryForObject(SQLiteQueryDTO.from(call));
+        callSingleValue(call, object);
+      } catch ( Exception e){
+        callSingleValue(call,e.getMessage());
+      }
     } else {
       callError(call, "plugin is null");
     }
