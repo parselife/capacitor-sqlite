@@ -20,6 +20,7 @@ import com.getcapacitor.JSArray;
 import com.getcapacitor.JSObject;
 import com.getcapacitor.PluginConfig;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -207,7 +208,7 @@ public class CapacitorSqlite {
             int type = cursor.getType(i);
             switch (type) {
                 case FIELD_TYPE_FLOAT:
-                    object.put(columnName, cursor.getFloat(i));
+                    object.put(columnName, new BigDecimal(String.valueOf(cursor.getFloat(i))));
                     break;
                 case FIELD_TYPE_INTEGER:
                     object.put(columnName, cursor.getInt(i));
